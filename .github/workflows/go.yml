@@ -16,6 +16,8 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
+          check-latest: true
+          cache: true
           go-version: 1.19
 
       - name: Verify dependencies
