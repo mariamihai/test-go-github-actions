@@ -22,7 +22,7 @@ jobs:
         run: go mod verify
 
       - name: Build
-        run: go build ./...
+        run: go build ./cmd/abc
 
       - name: Test
         run: go test -v ./...
