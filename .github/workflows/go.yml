@@ -27,7 +27,6 @@ jobs:
         run: >
           echo $(shell echo "--out-format json ./... > $(shell pwd)/golangci-lint.json") &&
           docker run \
-          -it \
           -v ~/go:/root/go \
           -v golangci-lint-cache:/root/.cache \
           -v $(pwd):/app \
