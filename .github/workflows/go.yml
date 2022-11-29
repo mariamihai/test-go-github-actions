@@ -27,11 +27,11 @@ jobs:
         run: >
           echo $(shell echo "--out-format json ./... > $(pwd)/golangci-lint.json") &&
           docker run \
-          -v ~/go:/root/go \
-          -v golangci-lint-cache:/root/.cache \
-          -v $(pwd):/app \
-          -w /app \
-          golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s $(shell echo "--out-format json ./... > $(pwd)/golangci-lint.json") -v
+            -v ~/go:/root/go \
+            -v golangci-lint-cache:/root/.cache \
+            -v $(pwd):/app \
+            -w /app \
+            golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s $(shell echo "--out-format json ./... > $(pwd)/golangci-lint.json") -v
           ls -R
 
       - uses: actions/upload-artifact@v3
