@@ -84,6 +84,9 @@ jobs:
         with:
           name: report.json
 
+      - name: Display structure of downloaded files
+        run: ls -R
+
       - uses: actions/checkout@v2
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
@@ -93,6 +96,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#        with:
+#          args: >
+#            -Dsonar.pullrequest.key=${{ github.event.number }}
+#            -Dsonar.pullrequest.branch=${{ github.HEAD_REF }}
+#            -Dsonar.pullrequest.base=${{ github.BASE_REF }}
+#            -Dsonar.pullrequest.github.repository=${{ github.repository }}
 
   build:
     name: Build
