@@ -24,14 +24,15 @@ jobs:
         run: go mod verify
 
       - name: golangci-lint
-        run: |
+        run: >
+          $(eval OUTPUT_OPTIONS = $(shell [ "${EXPORT_RESULT}" == "true" ] && echo "--out-format json ./... | tee /dev/tty > golangci-lint.json" || echo "" ))
           docker run \
             --rm \
             -v ~/go:/root/go \
             -v golangci-lint-cache:/root/.cache \
-            -v $(pwd):/app \
+            -v $(shell pwd):/app \
             -w /app \
-            golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s --out-format json ./... | tee /dev/tty > golangci-lint.json -v
+            golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s $(OUTPUT_OPTIONS) -v
 
   test:
     name: Test
