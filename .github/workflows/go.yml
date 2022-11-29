@@ -60,7 +60,9 @@ jobs:
           go-version-file: ./go.mod
 
       - name: Test & Generate Coverage and Report
-        run: go test "./..." -coverprofile="coverage.out" -covermode=count -json > report.json
+        run: |
+          go test "./..." -coverprofile="coverage.out" -covermode=count -json > report.json && \
+          sonar-scanner -X
 
   build:
     name: Build
