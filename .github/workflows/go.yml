@@ -33,7 +33,6 @@ jobs:
             -w /app \
             golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s $(shell echo "--out-format json ./... > $(pwd)/golangci-lint.json") -v
           ls -R
-        shell: bash
 
       - uses: actions/upload-artifact@v3
         with:
