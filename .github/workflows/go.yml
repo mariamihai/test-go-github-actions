@@ -43,7 +43,8 @@ jobs:
           # Optional: if set to true then the action don't cache or restore ~/.cache/go-build.
           # skip-build-cache: true
 
-  build:
+  test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -55,10 +56,20 @@ jobs:
           check-latest: true
           go-version-file: ./go.mod
 
+      - name: Test
+        run: go test -v ./...
 
+  build:
+    name: Build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          check-latest: true
+          go-version-file: ./go.mod
 
       - name: Build
         run: go build ./cmd/abc
-
-      - name: Test
-        run: go test -v ./...
