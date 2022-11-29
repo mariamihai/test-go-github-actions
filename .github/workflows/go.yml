@@ -37,7 +37,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: golangci-lint.json
-          path: ./golangci-lint.json
+          path: golangci-lint.json
 
   test:
     name: Test
@@ -60,12 +60,12 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: coverage.out
-          path: ./coverage.out
+          path: coverage.out
 
       - uses: actions/upload-artifact@v3
         with:
           name: report.json
-          path: ./report.json
+          path: report.json
 
   sonarcloud:
     name: SonarCloud
