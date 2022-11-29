@@ -11,14 +11,14 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Set up Go
         uses: actions/setup-go@v3
         with:
           check-latest: true
           go-version-file: ./go.mod
-
-      - name: Checkout
-        uses: actions/checkout@v3
 
       - name: Verify dependencies
         run: go mod verify
