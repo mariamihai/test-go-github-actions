@@ -61,7 +61,8 @@ jobs:
 
       - name: Test & Generate Coverage and Report
         run: |
-          go test "./..." -coverprofile="coverage.out" -covermode=count -json > report.json
+          go test "./..." -coverprofile="coverage.out" -covermode=count -json > report.json && \
+          less coverage.out
 
   build:
     name: Build
