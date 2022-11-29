@@ -25,20 +25,23 @@ jobs:
 
       - name: golangci-lint
         run: >
-          $(eval OUTPUT_OPTIONS = $(shell [ "${EXPORT_RESULT}" == "true" ] && echo "--out-format json ./... | tee /dev/tty > golangci-lint.json" || echo "" ))
+          $(eval OUTPUT_OPTIONS = $(shell echo "--out-format json ./... > $(shell pwd)/golangci-lint.json" ))
+          echo $(OUTPUT_OPTIONS)
           docker run \
-            --rm \
-            -v ~/go:/root/go \
-            -v golangci-lint-cache:/root/.cache \
-            -v $(pwd):/app \
-            -w /app \
-            golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s $(OUTPUT_OPTIONS) -v
+          -it \
+          --rm \
+          -v ~/go:/root/go \
+          -v golangci-lint-cache:/root/.cache \
+          -v $(shell pwd):/app \
+          -w /app \
+          golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s $(OUTPUT_OPTIONS) -v
           ls -R
 
       - uses: actions/upload-artifact@v3
         with:
           name: golangci-lint.json
           path: golangci-lint.json
+#          if-no-files-found: error
 
   test:
     name: Test
