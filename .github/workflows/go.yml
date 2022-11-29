@@ -31,7 +31,6 @@ jobs:
             -v $(pwd):/app \
             -w /app \
             golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s --out-format json ./... > golangci-lint.json -v
-          ls -R
 
       - uses: actions/upload-artifact@v3
         with:
@@ -72,9 +71,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [lint, test]
     steps:
-#      - uses: actions/download-artifact@v3
-#        with:
-#          name: golangci-lint.json
+      - uses: actions/download-artifact@v3
+        with:
+          name: golangci-lint.json
 
       - uses: actions/download-artifact@v3
         with:
