@@ -56,11 +56,11 @@ jobs:
           check-latest: true
           go-version-file: ./go.mod
 
-      - name: Test
-        run: go test -v ./...
-
       - name: Generate Test Report
         run: go test -json ./... > test-report.out
+
+      - name: Test
+        run: go test -v ./...
 
 
   build:
