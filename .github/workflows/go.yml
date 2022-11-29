@@ -27,6 +27,8 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
           version: latest
+          # golangci-lint run ./... --verbose --no-config --out-format checkstyle > golangci-lint.out
+
           # Optional: golangci-lint command line arguments.
           # args: --issues-exit-code=0
 
@@ -56,12 +58,8 @@ jobs:
           check-latest: true
           go-version-file: ./go.mod
 
-      - name: Generate Test Report
-        run: go test -json ./... > test-report.out
-
-      - name: Test
-        run: go test -v ./...
-
+      - name: Test & Generate Coverage and Report
+        run: go test "./..." -coverprofile="coverage.out" -covermode=count -json > report.json
 
   build:
     name: Build
