@@ -7,9 +7,9 @@ func main() {
 	fmt.Println("Initial commit")
 	fmt.Println("Initial commit")
 
-	abc()
+	Abc()
 }
 
-func abc() {
-	fmt.Println("Initial commit")
+func Abc() string {
+	return "abc"
 }
