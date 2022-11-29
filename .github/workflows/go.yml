@@ -19,7 +19,6 @@ jobs:
           check-latest: true
           go-version-file: ./go.mod
           cache: true
-          cache-dependency-path: ./go.sum
 
       - name: Verify dependencies
         run: go mod verify
