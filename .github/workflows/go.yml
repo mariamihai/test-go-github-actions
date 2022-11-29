@@ -18,6 +18,7 @@ jobs:
         with:
           check-latest: true
           go-version-file: ./go.mod
+          cache: true
 
       - name: Verify dependencies
         run: go mod verify
