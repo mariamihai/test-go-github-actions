@@ -59,6 +59,9 @@ jobs:
       - name: Test
         run: go test -v ./...
 
+      - name: Generate Test Report
+        run: go test -json ./... > test-report.out
+
 
   build:
     name: Build
