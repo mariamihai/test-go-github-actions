@@ -1,3 +1,5 @@
 /.idea/
 /vendor/
 /cmd.exe
+/coverage.out
+/report.json
