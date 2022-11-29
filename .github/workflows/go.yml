@@ -26,7 +26,6 @@ jobs:
       - name: golangci-lint
         run: |
           docker run \
-            -it \
             --rm \
             -v ~/go:/root/go \
             -v golangci-lint-cache:/root/.cache \
