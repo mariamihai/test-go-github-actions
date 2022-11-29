@@ -7,5 +7,4 @@ func main() {
 	fmt.Println("Initial commit")
 	fmt.Println("Initial commit")
 
-	a := 2
 }
