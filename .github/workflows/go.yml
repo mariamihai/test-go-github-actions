@@ -24,9 +24,20 @@ jobs:
         run: go mod verify
 
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v3
-        with:
-          version: latest
+        run: |
+          $(eval OUTPUT_OPTIONS = $(shell [ "${EXPORT_RESULT}" == "true" ] && echo "--out-format checkstyle ./... | tee /dev/tty > checkstyle-report.xml" || echo "" )) && \
+          docker run \
+          		-it \
+          		--rm \
+          		-v ~/go:/root/go \
+          		-v golangci-lint-cache:/root/.cache \
+          		-v $(shell pwd):/app \
+          		-w /app \
+          		golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s $(OUTPUT_OPTIONS) -v
+#      - name: golangci-lint
+#        uses: golangci/golangci-lint-action@v3
+#        with:
+#          version: latest
           # golangci-lint run ./... --verbose --no-config --out-format checkstyle > golangci-lint.out
 
           # Optional: golangci-lint command line arguments.
