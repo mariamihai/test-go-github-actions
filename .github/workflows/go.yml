@@ -25,13 +25,13 @@ jobs:
 
       - name: golangci-lint
         run: >
-          echo $(echo "--out-format json ./... > $(pwd)/golangci-lint.json") &&
+          $(eval OUTPUT_OPTIONS = $(echo "--out-format json ./... | tee /dev/tty > golangci-lint.json")) &&
           docker run \
             -v ~/go:/root/go \
             -v golangci-lint-cache:/root/.cache \
             -v $(pwd):/app \
             -w /app \
-            golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s $(echo "--out-format json ./... > $(pwd)/golangci-lint.json") -v
+            golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s $(OUTPUT_OPTIONS) -v
           ls -R
 
       - uses: actions/upload-artifact@v3
