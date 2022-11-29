@@ -25,7 +25,6 @@ jobs:
 
       - name: golangci-lint
         run: >
-          $(eval OUTPUT_OPTIONS = $(shell echo "--out-format json ./... > $(shell pwd)/golangci-lint.json" )) && 
           echo $(shell echo "--out-format json ./... > $(shell pwd)/golangci-lint.json") &&
           docker run \
           -it \
