@@ -72,9 +72,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [lint, test]
     steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: golangci-lint.json
+#      - uses: actions/download-artifact@v3
+#        with:
+#          name: golangci-lint.json
 
       - uses: actions/download-artifact@v3
         with:
