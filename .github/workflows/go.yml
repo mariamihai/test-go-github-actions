@@ -20,7 +20,7 @@ jobs:
           check-latest: true
           go-version-file: ./go.mod
 
-      - run: mkdir -p /github/workspace/files
+      - run: mkdir -p ./files
 
       - name: Verify dependencies
         run: go mod verify
