@@ -114,11 +114,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#        with:
-#          args: >
-#            -Dsonar.go.tests.reportPath= files/report.json
-#            -Dsonar.go.coverage.reportPaths=files/coverage.out
-#            -Dsonar.go.golangci-lint.reportPaths=files/golangci-lint.json
+        with:
+          args: >
+            -Dsonar.go.tests.reportPath=./files/report.json
+            -Dsonar.go.coverage.reportPaths=./files/coverage.out
+            -Dsonar.go.golangci-lint.reportPaths=./files/golangci-lint.json
 
   build:
     name: Build
