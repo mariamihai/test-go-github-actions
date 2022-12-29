@@ -3,3 +3,4 @@
 /cmd.exe
 /coverage.out
 /report.json
+/golangci-lint.json
