@@ -100,9 +100,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            - sonar.go.tests.reportPath=report.json
-            - sonar.go.coverage.reportPaths=coverage.out
-            - sonar.go.golangci-lint.reportPaths=golangci-lint.json
+            -Dsonar.go.tests.reportPath=report.json
+            -Dsonar.go.coverage.reportPaths=coverage.out
+            -Dsonar.go.golangci-lint.reportPaths=golangci-lint.json
 #            -Dsonar.pullrequest.key=${{ github.event.number }}
 #            -Dsonar.pullrequest.branch=${{ github.HEAD_REF }}
 #            -Dsonar.pullrequest.base=${{ github.BASE_REF }}
