@@ -119,10 +119,6 @@ jobs:
 #            -Dsonar.go.tests.reportPath= files/report.json
 #            -Dsonar.go.coverage.reportPaths=files/coverage.out
 #            -Dsonar.go.golangci-lint.reportPaths=files/golangci-lint.json
-#            -Dsonar.pullrequest.key=${{ github.event.number }}
-#            -Dsonar.pullrequest.branch=${{ github.HEAD_REF }}
-#            -Dsonar.pullrequest.base=${{ github.BASE_REF }}
-#            -Dsonar.pullrequest.github.repository=${{ github.repository }}
 
   build:
     name: Build
