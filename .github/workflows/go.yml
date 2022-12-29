@@ -101,7 +101,7 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R
 
-      - run: cd ./files
+      - run: cd files
 
       - name: Path
         run: pwd
