@@ -34,7 +34,7 @@ jobs:
             -v golangci-lint-cache:/root/.cache \
             -v $(pwd):/app \
             -w /app \
-            golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s --out-format json ./... > golangci-lint.json -v
+            golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s --out-format json ./... > files/golangci-lint.json -v
 
       - uses: actions/upload-artifact@v3
         with:
@@ -60,7 +60,7 @@ jobs:
 
       - name: Test & Generate Coverage and Report
         run: |
-          go test "./..." -coverprofile="coverage.out" -covermode=count -json > report.json
+          go test "./..." -coverprofile="files/coverage.out" -covermode=count -json > files/report.json
 
       - uses: actions/upload-artifact@v3
         with:
