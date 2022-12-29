@@ -88,9 +88,6 @@ jobs:
           # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
 
-      - name: Display structure of files
-        run: ls -R
-
       - uses: actions/download-artifact@v3
         with:
           name: golangci-lint.json
@@ -108,20 +105,6 @@ jobs:
 
       - name: Display structure of downloaded files
         run: ls -R
-
-#      - run: cd files
-#
-#      - name: Path
-#        run: |
-#          pwd
-#          cd .
-#          pwd
-
-      - name: Print the final result
-        shell: bash
-        run: |
-          value=`cat files/report.json`
-          echo The result is $value
 
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
