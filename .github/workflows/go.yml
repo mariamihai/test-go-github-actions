@@ -20,12 +20,10 @@ jobs:
           check-latest: true
           go-version-file: ./go.mod
 
-      - run: mkdir -p ./files
-
       - name: Verify dependencies
         run: go mod verify
 
-      - run: mkdir -p files
+      - run: mkdir -p ./files
 
       - name: golangci-lint
         run: >
