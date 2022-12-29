@@ -39,7 +39,7 @@ jobs:
                   -v golangci-lint-cache:/root/.cache \
                   -v $(pwd):/app \
                   -w /app \
-                  golangci/golangci-lint:latest-alpine golangci-lint run
+                  golangci/golangci-lint:latest-alpine golangci-lint run \
                   --out-format checkstyle -D deadcode,unused --timeout 10m --issues-exit-code 0 ./... > ../golangci-lint.xml
           cd ..
           sed -i 's+<file name="+<file name="go/+g' golangci-lint.xml
