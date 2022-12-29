@@ -26,17 +26,37 @@ jobs:
       - run: mkdir -p ./files
 
       - name: golangci-lint
-        run: >
+#        run: >
+#          docker run \
+#            -v ~/go:/root/go \
+#            -v golangci-lint-cache:/root/.cache \
+#            -v $(pwd):/app \
+#            -w /app \
+#            golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s --out-format json ./... > ./files/golangci-lint.json -v
+        run: |
           docker run \
-            -v ~/go:/root/go \
-            -v golangci-lint-cache:/root/.cache \
-            -v $(pwd):/app \
-            -w /app \
-            golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s --out-format json ./... > ./files/golangci-lint.json -v
+                  -v ~/go:/root/go \
+                  -v golangci-lint-cache:/root/.cache \
+                  -v $(pwd):/app \
+                  -w /app \
+                  golangci/golangci-lint:latest-alpine golangci-lint run
+                  --out-format checkstyle -D deadcode,unused --timeout 10m --issues-exit-code 0 ./... > ../golangci-lint.xml
+          cd ..
+          sed -i 's+<file name="+<file name="go/+g' golangci-lint.xml
+          cat report.xml
+
+#      - name: Create golangci-lint report
+#        run: |
+#          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.42.1
+#          cd go
+#          /home/runner/go/bin/golangci-lint run --out-format checkstyle -D deadcode,unused --build-tags=integration --timeout 10m --issues-exit-code 0 ./... > ../report.xml
+#          cd ..
+#          sed -i 's+<file name="+<file name="go/+g' report.xml
+#          cat report.xml
 
       - uses: actions/upload-artifact@v3
         with:
-          name: golangci-lint.json
+          name: golangci-lint.xml
           path: ./files
           if-no-files-found: warn
 
@@ -90,7 +110,7 @@ jobs:
 
       - uses: actions/download-artifact@v3
         with:
-          name: golangci-lint.json
+          name: golangci-lint.xml
           path: ./files
 
       - uses: actions/download-artifact@v3
@@ -115,7 +135,7 @@ jobs:
           args: >
             -Dsonar.go.tests.reportPath=files/report.json
             -Dsonar.go.coverage.reportPaths=files/coverage.out
-            -Dsonar.go.golangci-lint.reportPaths=files/golangci-lint.json
+            -Dsonar.go.golangci-lint.reportPaths=files/golangci-lint.xml
             -Dsonar.sources=.
 
   build:
