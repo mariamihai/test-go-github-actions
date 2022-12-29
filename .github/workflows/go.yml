@@ -86,17 +86,17 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: golangci-lint.json
-          path: /github/workspace/files
+          path: ./files
 
       - uses: actions/download-artifact@v3
         with:
           name: coverage.out
-          path: /github/workspace/files
+          path: ./files
 
       - uses: actions/download-artifact@v3
         with:
           name: report.json
-          path: /github/workspace/files
+          path: ./files
 
       - name: Display structure of downloaded files
         run: ls -R
