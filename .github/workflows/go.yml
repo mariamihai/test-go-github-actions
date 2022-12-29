@@ -32,13 +32,16 @@ jobs:
             -v golangci-lint-cache:/root/.cache \
             -v $(pwd):/app \
             -w /app \
-            golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s --out-format json ./... > /github/workspace/files/golangci-lint.json -v
+            golangci/golangci-lint:latest-alpine golangci-lint run --deadline=65s --out-format json ./... > ./files/golangci-lint.json -v
 
       - uses: actions/upload-artifact@v3
         with:
           name: golangci-lint.json
-          path: /github/workspace/files
+          path: ./files
           if-no-files-found: warn
+
+      - name: Display structure of files
+        run: ls -R
 
   test:
     name: Test
@@ -48,7 +51,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - run: mkdir -p /github/workspace/files
+      - run: mkdir -p ./files
 
       - name: Set up Go
         uses: actions/setup-go@v3
@@ -58,19 +61,22 @@ jobs:
 
       - name: Test & Generate Coverage and Report
         run: |
-          go test "./..." -coverprofile="files/coverage.out" -covermode=count -json > /github/workspace/files/report.json
+          go test "./..." -coverprofile="./files/coverage.out" -covermode=count -json > ./files/report.json
 
       - uses: actions/upload-artifact@v3
         with:
           name: coverage.out
-          path: /github/workspace/files/coverage.out
+          path: ./files/coverage.out
           if-no-files-found: warn
 
       - uses: actions/upload-artifact@v3
         with:
           name: report.json
-          path: /github/workspace/files/report.json
+          path: ./files/report.json
           if-no-files-found: warn
+
+      - name: Display structure of files
+        run: ls -R
 
   sonarcloud:
     name: SonarCloud
