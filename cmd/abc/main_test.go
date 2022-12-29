@@ -9,3 +9,7 @@ import (
 func TestAbc(t *testing.T) {
 	assert.Equal(t, "abc", Abc())
 }
+
+func TestBcd(t *testing.T) {
+	assert.Equal(t, "bcd", Bcd())
+}
