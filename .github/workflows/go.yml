@@ -73,15 +73,18 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: files/golangci-lint.json
+          name: golangci-lint.json
+          if-no-files-found: warn
 
       - uses: actions/download-artifact@v3
         with:
-          name: files/coverage.out
+          name: coverage.out
+          if-no-files-found: warn
 
       - uses: actions/download-artifact@v3
         with:
-          name: files/report.json
+          name: report.json
+          if-no-files-found: warn
 
       - name: Display structure of downloaded files
         run: ls -R
