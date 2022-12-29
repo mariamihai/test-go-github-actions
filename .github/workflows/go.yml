@@ -106,6 +106,9 @@ jobs:
       - name: Path
         run: cd . && pwd
 
+      - name: Display structure of downloaded files
+        run: ls -R
+
       - uses: actions/checkout@v2
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
