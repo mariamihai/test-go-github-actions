@@ -51,13 +51,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - run: mkdir -p ./files
-
       - name: Set up Go
         uses: actions/setup-go@v3
         with:
           check-latest: true
           go-version-file: ./go.mod
+
+      - run: mkdir -p ./files
 
       - name: Test & Generate Coverage and Report
         run: |
@@ -109,16 +109,13 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R
 
-      - run: cd files
-
-      - name: Path
-        run: |
-          pwd
-          cd . 
-          pwd
-
-      - name: Display structure of downloaded files
-        run: ls -R
+#      - run: cd files
+#
+#      - name: Path
+#        run: |
+#          pwd
+#          cd .
+#          pwd
 
       - name: Print the final result
         shell: bash
@@ -133,9 +130,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.go.tests.reportPath=./files/report.json
-            -Dsonar.go.coverage.reportPaths=./files/coverage.out
-            -Dsonar.go.golangci-lint.reportPaths=./files/golangci-lint.json
+            -Dsonar.go.tests.reportPath=files/report.json
+            -Dsonar.go.coverage.reportPaths=files/coverage.out
+            -Dsonar.go.golangci-lint.reportPaths=files/golangci-lint.json
 
   build:
     name: Build
