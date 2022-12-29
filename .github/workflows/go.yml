@@ -114,11 +114,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.go.tests.reportPath= /home/runner/work/test-go-github-actions/test-go-github-actions/files/report.json
-            -Dsonar.go.coverage.reportPaths= /home/runner/work/test-go-github-actions/test-go-github-actions/files/coverage.out
-            -Dsonar.go.golangci-lint.reportPaths= /home/runner/work/test-go-github-actions/test-go-github-actions/files/golangci-lint.json
+#        with:
+#          args: >
+#            -Dsonar.go.tests.reportPath=/home/runner/work/test-go-github-actions/test-go-github-actions/files/report.json
+#            -Dsonar.go.coverage.reportPaths=/home/runner/work/test-go-github-actions/test-go-github-actions/files/coverage.out
+#            -Dsonar.go.golangci-lint.reportPaths=/home/runner/work/test-go-github-actions/test-go-github-actions/files/golangci-lint.json
 
   build:
     name: Build
