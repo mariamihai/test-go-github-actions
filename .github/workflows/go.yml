@@ -35,8 +35,8 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: golangci-lint.json
-          path: golangci-lint.json
-#          if-no-files-found: error
+          path: files
+#          if-no-files-found: warn
 
   test:
     name: Test
@@ -59,12 +59,12 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: coverage.out
-          path: coverage.out
+          path: files
 
       - uses: actions/upload-artifact@v3
         with:
           name: report.json
-          path: report.json
+          path: files
 
   sonarcloud:
     name: SonarCloud
@@ -73,21 +73,22 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: golangci-lint.json
+          name: files/golangci-lint.json
           if-no-files-found: warn
 
       - uses: actions/download-artifact@v3
         with:
-          name: coverage.out
+          name: files/coverage.out
           if-no-files-found: warn
 
       - uses: actions/download-artifact@v3
         with:
-          name: report.json
+          name: files/report.json
           if-no-files-found: warn
 
       - name: Display structure of downloaded files
         run: ls -R
+        working-directory: path/to/artifact
 
       - name: Path
         run: pwd
