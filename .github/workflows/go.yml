@@ -40,10 +40,9 @@ jobs:
                   -v $(pwd):/app \
                   -w /app \
                   golangci/golangci-lint:latest-alpine golangci-lint run \
-                  --out-format checkstyle >> report.xml ./files/golangci-lint.xml
-          cd ..
-          sed -i 's+<file name="+<file name="go/+g' golangci-lint.xml
-          cat golangci-lint.xml
+                  --out-format checkstyle >> ./files/golangci-lint.xml
+          sed -i 's+<file name="+<file name="go/+g' ./files/golangci-lint.xml
+          cat ./files/golangci-lint.xml
 
 #      - name: Create golangci-lint report
 #        run: |
