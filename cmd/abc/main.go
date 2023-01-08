@@ -1,11 +1,9 @@
 package main
 
-import "fmt"
-
 func main() {
 	Abc()
 	Bcd()
-	Cde()
+	//Cde()
 }
 
 func Abc() string {
@@ -16,6 +14,7 @@ func Bcd() string {
 	return "bcd"
 }
 
-func Cde() error {
-	return fmt.Errorf("cde")
-}
+//
+//func Cde() error {
+//	return fmt.Errorf("cde")
+//}
